@@ -120,15 +120,13 @@ def walsh_quantum_trotter(potential, initial_wave_function, n, L, dt, D=1/2, ter
 #         out = True
 #         states = [Statevector.from_instruction(qc)]
 
-#     if verbose: progress = tqdm(total=K, desc='working on time evolution')
-#     for i in range(K):
+    # Potential Step
+    qc.append(potential_step, qargs=[i for i in range(n)][::-1])
+
         # Kinetic Step
     qc.append(qft, qargs=[i for i in range(n)])
     qc.append(kinetic_step, qargs=[i for i in range(n)])
     qc.append(iqft, qargs=[i for i in range(n)])
-
-    # Potential Step
-    qc.append(potential_step, qargs=[i for i in range(n)][::-1])
 
 #         if out:
 #             states.append(Statevector.from_instruction(qc))

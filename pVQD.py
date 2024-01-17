@@ -548,3 +548,5 @@ class pVQD:
         log_data['tot_steps']   = [tot_steps]
 
         json.dump(log_data, open( filename,'w+'))
+        
+        return self.parameters
